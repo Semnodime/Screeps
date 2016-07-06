@@ -3,18 +3,18 @@ var e = module.exports;
 
 /* Variables */
 Memory.warnings = {
-    "Wx0000" : "Unknown role ",
-    "Wx0001" : "Unknown Warning ",
+    "Wx0000": "Unknown role ",
+    "Wx0001": "Unknown Warning ",
 };
 
 /* Functions */
 /** @param {Creep} creep **/
-e.initializeCreep = function (creep){
+e.initializeCreep = function (creep) {
 
     creep.is_muted = function is_muted(level) {
         return (creep.memory.verbose.indexOf(level) == -1)
     };
-    
+
     creep.set_muted = function set_muted(level, mute) {
         if (mute && !this.is_muted(level)) {
             creep.memory.verbose.splice(creep.memory.verbose.indexOf(level));
@@ -23,7 +23,7 @@ e.initializeCreep = function (creep){
         }
         return (this.is_muted(level) == mute);
     };
-    
+
     creep.out = function out(level, message, log) {
         if (!this.is_muted(level)) {
             if (log) {
@@ -36,13 +36,12 @@ e.initializeCreep = function (creep){
         }
         return false;
     };
-    
+
     creep.both = function both(level, message) {
         return this.out(level, message, true) && this.out(level, message, false);
     };
-    
-    creep.warning = function (code, optional) 
-    {
+
+    creep.warning = function (code, optional) {
         if (Object.keys(Memory.warnings).indexOf(code) == -1) {
             code = "Wx0001";
         }
